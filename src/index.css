@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BRD Crypto Game Design System
+Color palette based on BRD brand colors: #E13325, #5A1E14, #8E452C, #8D2D00, #EBCFAE
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* BRD Brand Colors */
+    --brd-primary: 4 77% 52%;
+    --brd-dark: 14 62% 22%;
+    --brd-medium: 20 51% 37%;
+    --brd-orange: 20 100% 28%;
+    --brd-light: 33 58% 80%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--brd-primary)), hsl(var(--brd-orange)));
+    --gradient-dark: linear-gradient(180deg, hsl(var(--brd-dark)), hsl(var(--brd-medium)));
+    --gradient-glow: radial-gradient(circle, hsl(var(--brd-primary) / 0.3), transparent);
+    
+    /* Shadows */
+    --shadow-brd: 0 10px 30px -10px hsl(var(--brd-primary) / 0.4);
+    --shadow-glow: 0 0 40px hsl(var(--brd-primary) / 0.3);
+    
+    /* System Colors using BRD palette */
+    --background: 33 58% 95%;
+    --foreground: 14 62% 15%;
+
+    --card: 33 58% 92%;
+    --card-foreground: 14 62% 15%;
+
+    --popover: 33 58% 95%;
+    --popover-foreground: 14 62% 15%;
+
+    --primary: 4 77% 52%;
+    --primary-foreground: 33 58% 95%;
+
+    --secondary: 33 58% 85%;
+    --secondary-foreground: 14 62% 22%;
+
+    --muted: 33 58% 88%;
+    --muted-foreground: 20 51% 37%;
+
+    --accent: 20 100% 28%;
+    --accent-foreground: 33 58% 95%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 33 58% 95%;
+
+    --border: 33 58% 82%;
+    --input: 33 58% 90%;
+    --ring: 4 77% 52%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark theme using BRD colors */
+    --background: 14 62% 8%;
+    --foreground: 33 58% 90%;
+
+    --card: 14 62% 12%;
+    --card-foreground: 33 58% 90%;
+
+    --popover: 14 62% 10%;
+    --popover-foreground: 33 58% 90%;
+
+    --primary: 4 77% 52%;
+    --primary-foreground: 33 58% 95%;
+
+    --secondary: 20 51% 25%;
+    --secondary-foreground: 33 58% 90%;
+
+    --muted: 20 51% 20%;
+    --muted-foreground: 33 58% 70%;
+
+    --accent: 20 100% 35%;
+    --accent-foreground: 33 58% 95%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 33 58% 95%;
+
+    --border: 20 51% 25%;
+    --input: 20 51% 20%;
+    --ring: 4 77% 52%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+/* Body styling */
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
