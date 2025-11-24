@@ -5,29 +5,80 @@
 /* --- BRD Theme Design System --- */
 
 :root {
-    /* BRD Brand Colors */
-    --brd-primary: 4 77% 52%;
-    --brd-dark: 14 62% 22%;
-    --brd-medium: 20 51% 37%;
-    --brd-orange: 20 100% 28%;
-    --brd-light: 33 58% 80%;
+  --radius: 0.5rem;
 
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--brd-primary)), hsl(var(--brd-orange)));
-    --gradient-dark: linear-gradient(180deg, hsl(var(--brd-dark)), hsl(var(--brd-medium)));
-    --gradient-glow: radial-gradient(circle, hsl(var(--brd-primary) / 0.3), transparent);
+  /* Core Theme */
+  --background: 210 40% 8%;
+  --foreground: 210 20% 98%;
 
-    /* Shadows */
-    --shadow-brd: 0 10px 30px -10px hsl(var(--brd-primary) / 0.4);
-    --shadow-glow: 0 0 40px hsl(var(--brd-primary) / 0.3);
+  /* BRAND COLORS */
+  --primary: 268 89% 65%;        /* BRD Purple */
+  --primary-foreground: 0 0% 100%;
 
-    /* System Colors using BRD palette */
-    --background: 33 58% 95%;
-    --foreground: 14 62% 15%;
+  --secondary: 210 40% 20%;      /* Soft dark grey */
+  --secondary-foreground: 210 20% 98%;
 
-    --card: 33 58% 92%;
-    --card-foreground: 14 62% 15%;
+  --accent: 270 100% 75%;        /* Neon Purple */
+  --accent-foreground: 210 20% 10%;
 
-    --popover: 33 58% 95%;
-    --popover-foreground: 14 62% 15%;
+  /* Supporting */
+  --muted: 215 15% 22%;
+  --muted-foreground: 215 20% 80%;
+
+  --border: 215 15% 25%;
+  --input: 215 15% 25%;
+  --card: 215 15% 12%;
+  --card-foreground: 210 20% 98%;
+}
+
+/* Dark Mode */
+.dark {
+  --background: 210 40% 4%;
+  --foreground: 210 20% 98%;
+
+  --card: 215 22% 10%;
+  --card-foreground: 210 20% 98%;
+
+  --border: 215 15% 20%;
+  --input: 215 15% 20%;
+
+  --primary: 268 89% 65%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 215 15% 16%;
+  --secondary-foreground: 210 20% 98%;
+
+  --accent: 270 100% 75%;
+  --accent-foreground: 210 20% 10%;
+
+  --muted: 215 15% 18%;
+  --muted-foreground: 215 20% 80%;
+}
+
+/* --- Tailwind Component Layer (You Asked To Keep These) --- */
+
+@layer components {
+  /* BUTTON */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium transition;
+    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:opacity-90;
+  }
+
+  .btn-secondary {
+    @apply bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:opacity-90;
+  }
+
+  .btn-accent {
+    @apply bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] hover:opacity-90;
+  }
+
+  /* CARD */
+  .card {
+    @apply rounded-xl p-6 bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] border border-[hsl(var(--border))] shadow-lg;
+  }
+
+  /* INPUT */
+  .input {
+    @apply w-full px-3 py-2 rounded-lg bg-[hsl(var(--input))] border border-[hsl(var(--border))] text-[hsl(var(--foreground))] placeholder-[hsl(var(--muted-foreground))];
+  }
 }
