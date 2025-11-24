@@ -5,25 +5,31 @@
 /* --- BRD Theme Design System --- */
 
 :root {
-  --radius: 0.5rem;
+    /* BRD Brand Colors */
+    --brd-primary: 4 77% 52%;
+    --brd-dark: 14 62% 22%;
+    --brd-medium: 20 51% 37%;
+    --brd-orange: 20 100% 28%;
+    --brd-light: 33 58% 80%;
 
-  /* Core Theme */
-  --background: 210 40% 8%;
-  --foreground: 210 20% 98%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--brd-primary)), hsl(var(--brd-orange)));
+    --gradient-dark: linear-gradient(180deg, hsl(var(--brd-dark)), hsl(var(--brd-medium)));
+    --gradient-glow: radial-gradient(circle, hsl(var(--brd-primary) / 0.3), transparent);
 
-  /* BRAND COLORS */
-  --primary: 268 89% 65%;        /* BRD Purple */
-  --primary-foreground: 0 0% 100%;
+    /* Shadows */
+    --shadow-brd: 0 10px 30px -10px hsl(var(--brd-primary) / 0.4);
+    --shadow-glow: 0 0 40px hsl(var(--brd-primary) / 0.3);
 
-  --secondary: 210 40% 20%;      /* Soft dark grey */
-  --secondary-foreground: 210 20% 98%;
+    /* System Colors using BRD palette */
+    --background: 33 58% 95%;
+    --foreground: 14 62% 15%;
 
-  --accent: 270 100% 75%;        /* Neon Purple */
-  --accent-foreground: 210 20% 10%;
+    --card: 33 58% 92%;
+    --card-foreground: 14 62% 15%;
 
-  /* Supporting */
-  --muted: 215 15% 22%;
-  --muted-foreground: 215 20% 80%;
+    --popover: 33 58% 95%;
+    --popover-foreground: 14 62% 15%;
 
-  --border: 215 15% 25%;
-  --input: 2
+    --primary: 4 77% 52%;
+    --primary-foreground:
