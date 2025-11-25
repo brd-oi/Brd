@@ -28,20 +28,15 @@ const Index = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  const connectWallet = async () => {
-    setIsConnecting(true);
-    try {
-      // For demo purposes, we'll use email auth as wallet connection
-      // In a real app, you'd integrate with Web3 wallets like MetaMask
-      const email = prompt("Enter your email to connect wallet:");
-      if (email) {
-        const { error } = await supabase.auth.signInWithOtp({ email });
-        if (error) throw error;
-        toast({
-          title: "Check your email",
-          description: "We sent you a login link to connect your wallet.",
-        });
-      }
+  // TEMP TEST MODE
+const TEST_MODE = true;
+
+const mockWallet = {
+    publicKey: "TEST_WALLET_123",
+};
+
+const activeWallet = TEST_MODE ? mockWallet : wallet;
+
     } catch (error: any) {
       toast({
         title: "Connection failed",
