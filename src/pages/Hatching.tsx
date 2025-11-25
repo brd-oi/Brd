@@ -253,8 +253,27 @@ const Hatching = () => {
     return Math.min(100, Math.max(0, (elapsed / total) * 100));
   };
 
+  const getEggVideo = (speciesMix: string[]) => {
+    // Select egg video based on species mix
+    // Egg 1: Even number of species or common creatures
+    // Egg 2: Odd number of species or legendary creatures
+    const isEgg1 = speciesMix.length % 2 === 0;
+    return isEgg1 ? '/images/20251125_2322_video.mp4' : '/images/20251125_2323_video.mp4';
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-brd-light/20">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-brd-light/20 relative">
+      {/* Background Video - Always play */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="video-background"
+      >
+        <source src="/images/20251125_2312_video.mp4" type="video/mp4" />
+      </video>
+      <div className="video-background-overlay" />
       {/* Header */}
       <header className="border-b border-border/50 backdrop-blur-sm bg-background/80">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -374,35 +393,64 @@ const Hatching = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {activeHatches.map((hatch: any) => (
-                    <div key={hatch.id} className="p-4 border border-border/50 rounded-lg">
-                      <div className="flex justify-between items-start mb-3">
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <Coins className="w-4 h-4 text-accent" />
-                            <span className="font-semibold">{hatch.token_amount} BRD</span>
+                  {activeHatches.length > 0 && (() => {
+                    // Display only the first active hatch
+                    const hatch = activeHatches[0];
+                    const progress = getProgress(hatch.locked_at, hatch.unlock_at);
+                    const isHatching = progress < 100;
+                    const eggVideo = getEggVideo(hatch.characters_2025_11_20_15_49?.[0]?.species_mix || []);
+                    
+                    return (
+                      <div key={hatch.id} className="p-4 border border-border/50 rounded-lg">
+                        {/* Egg Video Display */}
+                        {isHatching && (
+                          <div className="flex justify-center mb-4">
+                            <video
+                              src={eggVideo}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-32 h-32 object-cover rounded-lg"
+                              style={{ aspectRatio: '1/1' }}
+                            />
                           </div>
-                          <p className="text-sm text-muted-foreground">
-                            {hatch.lock_duration_days} day lock
+                        )}
+
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              <Coins className="w-4 h-4 text-accent" />
+                              <span className="font-semibold">{hatch.token_amount} BRD</span>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              {hatch.lock_duration_days} day lock
+                            </p>
+                          </div>
+                          <Badge variant="outline" className="text-xs">
+                            {getTimeRemaining(hatch.unlock_at)}
+                          </Badge>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <div className="flex justify-between text-sm">
+                            <span>Progress</span>
+                            <span>{Math.round(progress)}%</span>
+                          </div>
+                          <Progress 
+                            value={progress} 
+                            className="h-2"
+                          />
+                        </div>
+
+                        {activeHatches.length > 1 && (
+                          <p className="text-xs text-muted-foreground text-center mt-4">
+                            +{activeHatches.length - 1} more hatching
                           </p>
-                        </div>
-                        <Badge variant="outline" className="text-xs">
-                          {getTimeRemaining(hatch.unlock_at)}
-                        </Badge>
+                        )}
                       </div>
-                      
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span>Progress</span>
-                          <span>{Math.round(getProgress(hatch.locked_at, hatch.unlock_at))}%</span>
-                        </div>
-                        <Progress 
-                          value={getProgress(hatch.locked_at, hatch.unlock_at)} 
-                          className="h-2"
-                        />
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })()}
                 </div>
               )}
             </CardContent>
