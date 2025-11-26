@@ -221,10 +221,10 @@ const Hatching = () => {
   const getRarityColor = (rarity: string) => {
     const colors = {
       common: 'bg-gray-500',
-      rare: 'bg-blue-500',
-      epic: 'bg-purple-500',
-      legendary: 'bg-orange-500',
-      mythical: 'bg-red-500'
+      rare: 'bg-[#E64A26]',
+      epic: 'bg-[#EB3A1C]',
+      legendary: 'bg-[#FF8A2F]',
+      mythical: 'bg-[#EB3A1C]'
     };
     return colors[rarity as keyof typeof colors] || colors.common;
   };
@@ -262,7 +262,14 @@ const Hatching = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-brd-light/20 relative">
+    <div className="min-h-screen relative" style={{
+      background: 'linear-gradient(180deg, #0C0F1D 0%, #2A1A14 30%, #5A2A18 60%, #8C3A14 100%)'
+    }}>
+      {/* Ambient lighting effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+      </div>
       {/* Background Video - Always play */}
       <video
         autoPlay
@@ -275,16 +282,16 @@ const Hatching = () => {
       </video>
       <div className="video-background-overlay" />
       {/* Header */}
-      <header className="border-b border-border/50 backdrop-blur-sm bg-background/80">
+      <header className="border-b border-orange-900/30 backdrop-blur-sm bg-black/20 relative z-10">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/">
-              <Button variant="ghost" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+              <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow">
+                <ArrowLeft className="w-4 h-4 inline mr-2" />
                 Back to Home
-              </Button>
+              </button>
             </Link>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold text-white" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif', letterSpacing: '0.05em' }}>
               Creature Hatching
             </h1>
           </div>
@@ -294,19 +301,25 @@ const Hatching = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Hatching Form */}
-          <Card className="border-primary/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-primary" />
-                Start New Hatch
-              </CardTitle>
-              <CardDescription>
+          <div className="rounded-[20px] overflow-hidden" style={{
+            background: 'linear-gradient(180deg, #3A1F17 0%, #2A1512 100%)',
+            boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.4)'
+          }}>
+            <div className="p-6">
+              <div className="flex items-center gap-2 mb-2">
+                <Zap className="w-5 h-5 text-[#FF8A2F]" />
+                <h2 className="text-xl font-bold text-white" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif', letterSpacing: '0.03em' }}>
+                  Start New Hatch
+                </h2>
+              </div>
+              <p className="text-[#F6DAB5] text-sm mb-6">
                 Lock your BRD tokens to create unique crossbreed creatures. Longer locks and higher amounts increase rarity chances.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
+              </p>
+            <div className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="tokenAmount">Token Amount (BRD)</Label>
+                <label htmlFor="tokenAmount" className="text-white font-semibold text-sm" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                  Token Amount (BRD)
+                </label>
                 <Input
                   id="tokenAmount"
                   type="number"
@@ -315,87 +328,93 @@ const Hatching = () => {
                   onChange={(e) => setTokenAmount(e.target.value)}
                   min="1"
                   step="0.1"
+                  className="bg-black/30 border-orange-900/50 text-white placeholder:text-[#F6DAB5]/50 rounded-xl"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="lockDuration">Lock Duration</Label>
+                <label htmlFor="lockDuration" className="text-white font-semibold text-sm" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                  Lock Duration
+                </label>
                 <Select value={lockDuration} onValueChange={setLockDuration}>
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-black/30 border-orange-900/50 text-white rounded-xl">
                     <SelectValue placeholder="Select lock period" />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="1">1 Day (Common chance)</SelectItem>
-                    <SelectItem value="3">3 Days (Rare chance)</SelectItem>
-                    <SelectItem value="7">7 Days (Epic chance)</SelectItem>
-                    <SelectItem value="14">14 Days (Legendary chance)</SelectItem>
-                    <SelectItem value="30">30 Days (Mythical chance)</SelectItem>
+                  <SelectContent className="bg-[#3A1F17] border-orange-900/50">
+                    <SelectItem value="1" className="text-white">1 Day (Common chance)</SelectItem>
+                    <SelectItem value="3" className="text-white">3 Days (Rare chance)</SelectItem>
+                    <SelectItem value="7" className="text-white">7 Days (Epic chance)</SelectItem>
+                    <SelectItem value="14" className="text-white">14 Days (Legendary chance)</SelectItem>
+                    <SelectItem value="30" className="text-white">30 Days (Mythical chance)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {tokenAmount && lockDuration && (
-                <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-                  <h4 className="font-semibold mb-2 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-primary" />
+                <div className="p-4 bg-black/20 rounded-xl border border-orange-900/30">
+                  <h4 className="font-semibold mb-2 flex items-center gap-2 text-white" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                    <Sparkles className="w-4 h-4 text-[#E5B468]" />
                     Predicted Rarity
                   </h4>
-                  <Badge className={getRarityColor(calculateRarity(parseInt(lockDuration), parseFloat(tokenAmount)))}>
+                  <span className={`inline-block px-3 py-1 rounded-full text-white font-bold text-xs ${getRarityColor(calculateRarity(parseInt(lockDuration), parseFloat(tokenAmount)))}`}>
                     {calculateRarity(parseInt(lockDuration), parseFloat(tokenAmount)).toUpperCase()}
-                  </Badge>
+                  </span>
                 </div>
               )}
 
-              <Button 
-                onClick={startHatching} 
+              <button
+                onClick={startHatching}
                 disabled={isHatching || !user}
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-                size="lg"
+                className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}
               >
                 {isHatching ? (
                   <>
-                    <Clock className="w-4 h-4 mr-2 animate-spin" />
+                    <Clock className="w-4 h-4 inline mr-2 animate-spin" />
                     Starting Hatch...
                   </>
                 ) : (
                   <>
-                    <Zap className="w-4 h-4 mr-2" />
+                    <Zap className="w-4 h-4 inline mr-2" />
                     Start Hatching
                   </>
                 )}
-              </Button>
+              </button>
 
               {!user && (
-                <p className="text-sm text-muted-foreground text-center">
+                <p className="text-sm text-[#F6DAB5] text-center">
                   Connect your wallet to start hatching creatures
                 </p>
               )}
-            </CardContent>
-          </Card>
+            </div>
+            </div>
+          </div>
 
           {/* Active Hatches */}
-          <Card className="border-accent/20">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-accent" />
-                Active Hatches
-              </CardTitle>
-              <CardDescription>
+          <div className="rounded-[20px] overflow-hidden" style={{
+            background: 'linear-gradient(180deg, #3A1F17 0%, #2A1512 100%)',
+            boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.4)'
+          }}>
+            <div className="p-6">
+              <div className="flex items-center gap-2 mb-2">
+                <Clock className="w-5 h-5 text-[#FF8A2F]" />
+                <h2 className="text-xl font-bold text-white" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif', letterSpacing: '0.03em' }}>
+                  Active Hatches
+                </h2>
+              </div>
+              <p className="text-[#F6DAB5] text-sm mb-6">
                 Track your creatures currently hatching
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="p-0">
+              </p>
+            <div className="p-0">
               <div className="w-full max-w-md mx-auto" style={{ aspectRatio: '2/3' }}>
                 {activeHatches.length === 0 ? (
                   // No active hatches: show background video with overlay
                   <div
-                    className="relative w-full h-full rounded-lg overflow-hidden"
+                    className="relative w-full h-full rounded-[20px] overflow-hidden"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(4, 77, 52, 0.3) 0%, rgba(20, 100, 40, 0.3) 100%)',
-                      border: '2px solid transparent',
-                      backgroundImage: 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), linear-gradient(135deg, hsl(4, 77%, 52%), hsl(20, 100%, 28%))',
-                      backgroundClip: 'padding-box, border-box',
-                      backgroundOrigin: 'padding-box, border-box',
+                      border: '3px solid',
+                      borderImage: 'linear-gradient(135deg, #FF7A22, #FFAA33) 1',
+                      boxShadow: '0 0 20px rgba(255, 122, 34, 0.3)'
                     }}
                   >
                     {/* Background video fill */}
@@ -433,13 +452,11 @@ const Hatching = () => {
                     return (
                       <div
                         key={hatch.id}
-                        className="relative w-full h-full rounded-lg overflow-hidden"
+                        className="relative w-full h-full rounded-[20px] overflow-hidden"
                         style={{
-                          background: 'linear-gradient(135deg, rgba(4, 77, 52, 0.3) 0%, rgba(20, 100, 40, 0.3) 100%)',
-                          border: '2px solid transparent',
-                          backgroundImage: 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), linear-gradient(135deg, hsl(4, 77%, 52%), hsl(20, 100%, 28%))',
-                          backgroundClip: 'padding-box, border-box',
-                          backgroundOrigin: 'padding-box, border-box',
+                          border: '3px solid',
+                          borderImage: 'linear-gradient(135deg, #FF7A22, #FFAA33) 1',
+                          boxShadow: '0 0 20px rgba(255, 122, 34, 0.3)'
                         }}
                       >
                         {/* Video background fill */}
@@ -467,9 +484,9 @@ const Hatching = () => {
                                 {hatch.lock_duration_days} day lock
                               </p>
                             </div>
-                            <Badge variant="outline" className="text-xs bg-black/40 text-white border-white/30">
+                            <span className="text-xs px-3 py-1 rounded-full bg-[#FF8A2F] text-white font-bold" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                               {getTimeRemaining(hatch.unlock_at)}
-                            </Badge>
+                            </span>
                           </div>
                         </div>
 
@@ -500,19 +517,24 @@ const Hatching = () => {
                   })()
                 )}
               </div>
-            </CardContent>
-          </Card>
+            </div>
+            </div>
+          </div>
         </div>
 
         {/* Rarity Guide */}
-        <Card className="mt-8 border-muted/20">
-          <CardHeader>
-            <CardTitle>Rarity Guide</CardTitle>
-            <CardDescription>
+        <div className="mt-8 rounded-[20px] overflow-hidden" style={{
+          background: 'linear-gradient(180deg, #3A1F17 0%, #2A1512 100%)',
+          boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.4)'
+        }}>
+          <div className="p-6">
+            <h2 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif', letterSpacing: '0.03em' }}>
+              Rarity Guide
+            </h2>
+            <p className="text-[#F6DAB5] text-sm mb-6">
               Understanding creature rarities and how to achieve them
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
+            </p>
+          <div>
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               {[
                 { rarity: 'Common', color: 'bg-gray-500', requirement: '< 50 points' },
@@ -521,21 +543,22 @@ const Hatching = () => {
                 { rarity: 'Legendary', color: 'bg-orange-500', requirement: '500-999 points' },
                 { rarity: 'Mythical', color: 'bg-red-500', requirement: '1000+ points' }
               ].map((item) => (
-                <div key={item.rarity} className="text-center p-4 border border-border/50 rounded-lg">
-                  <Badge className={`${item.color} mb-2`}>
+                <div key={item.rarity} className="text-center p-4 border border-orange-900/30 rounded-xl bg-black/20">
+                  <span className={`inline-block px-3 py-1 rounded-full text-white font-bold text-xs mb-2 ${item.color}`} style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                     {item.rarity}
-                  </Badge>
-                  <p className="text-xs text-muted-foreground">
+                  </span>
+                  <p className="text-xs text-[#F6DAB5]">
                     {item.requirement}
                   </p>
                 </div>
               ))}
             </div>
-            <p className="text-sm text-muted-foreground mt-4 text-center">
+            <p className="text-sm text-[#F6DAB5] mt-4 text-center">
               Points = Lock Duration (days) × Token Amount (BRD)
             </p>
-          </CardContent>
-        </Card>
+          </div>
+          </div>
+        </div>
       </div>
     </div>
   );
