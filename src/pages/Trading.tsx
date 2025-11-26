@@ -408,7 +408,7 @@ const Trading = () => {
             <Link to="/">
               <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Home
+                Home
               </button>
             </Link>
             <h1 className="text-2xl font-bold text-white" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif', letterSpacing: '0.05em' }}>
