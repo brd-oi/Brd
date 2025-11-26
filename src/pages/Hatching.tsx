@@ -412,11 +412,15 @@ const Hatching = () => {
                     {/* Gradient overlay for text contrast */}
                     <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" />
 
-                    {/* Centered content overlay */}
+                    {/* Centered icon and title */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-6">
                       <Clock className="w-12 h-12 mb-3 opacity-80" />
                       <p className="text-lg font-semibold">No active hatches</p>
-                      <p className="text-sm opacity-90 mt-1">Start your first hatch to see progress here</p>
+                    </div>
+
+                    {/* Bottom message */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
+                      <p className="text-sm text-white opacity-90 drop-shadow-md">Start your first hatch to see progress here</p>
                     </div>
                   </div>
                 ) : (
