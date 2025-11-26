@@ -333,10 +333,10 @@ const Trading = () => {
               />
               <button 
                 onClick={() => onList(creature.id, listPrice)}
-                className="w-full py-2 px-4 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow"
+                className="w-full py-2 px-4 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center"
                 style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}
               >
-                <Tag className="w-3 h-3 mr-1 inline" />
+                <Tag className="w-3 h-3 mr-1" />
                 List for Sale
               </button>
             </div>
@@ -345,10 +345,10 @@ const Trading = () => {
           {showPrice && !isOwned && (
             <button 
               onClick={() => onBuy(creature.tradeId, price)}
-              className="w-full py-2 px-4 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow"
+              className="w-full py-2 px-4 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center"
               style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}
             >
-              <ShoppingCart className="w-3 h-3 mr-1 inline" />
+              <ShoppingCart className="w-3 h-3 mr-1" />
               Buy Now
             </button>
           )}
@@ -356,7 +356,7 @@ const Trading = () => {
           {showPrice && isOwned && (
             <button 
               onClick={() => onCancel(creature.tradeId)}
-              className="w-full py-2 px-4 rounded-xl bg-black/30 border border-orange-900/50 text-white hover:bg-black/50 transition-colors text-sm"
+              className="w-full py-2 px-4 rounded-xl bg-black/30 border border-orange-900/50 text-white hover:bg-black/50 transition-colors text-sm flex items-center justify-center"
               style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}
             >
               Cancel Listing
@@ -382,7 +382,7 @@ const Trading = () => {
               Please connect your wallet to access the trading marketplace.
             </p>
             <Link to="/">
-              <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+              <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center mx-auto" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                 Go to Home
               </button>
             </Link>
@@ -406,8 +406,8 @@ const Trading = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/">
-              <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
-                <ArrowLeft className="w-4 h-4 inline mr-2" />
+              <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Home
               </button>
             </Link>
@@ -498,8 +498,8 @@ const Trading = () => {
                 <h3 className="text-lg font-semibold mb-2 text-white" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>No creatures yet</h3>
                 <p className="text-[#F6DAB5] mb-4">Start hatching to build your collection!</p>
                 <Link to="/hatching">
-                  <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
-                    <Zap className="w-4 h-4 mr-2 inline" />
+                  <button className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                    <Zap className="w-4 h-4 mr-2" />
                     Start Hatching
                   </button>
                 </Link>

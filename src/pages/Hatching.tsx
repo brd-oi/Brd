@@ -286,8 +286,8 @@ const Hatching = () => {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/">
-              <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow">
-                <ArrowLeft className="w-4 h-4 inline mr-2" />
+              <button className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-sm hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Home
               </button>
             </Link>
@@ -365,17 +365,17 @@ const Hatching = () => {
               <button
                 onClick={startHatching}
                 disabled={isHatching || !user}
-                className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                 style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}
               >
                 {isHatching ? (
                   <>
-                    <Clock className="w-4 h-4 inline mr-2 animate-spin" />
+                    <Clock className="w-4 h-4 mr-2 animate-spin" />
                     Starting Hatch...
                   </>
                 ) : (
                   <>
-                    <Zap className="w-4 h-4 inline mr-2" />
+                    <Zap className="w-4 h-4 mr-2" />
                     Start Hatching
                   </>
                 )}
