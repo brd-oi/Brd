@@ -384,114 +384,118 @@ const Hatching = () => {
                 Track your creatures currently hatching
               </CardDescription>
             </CardHeader>
-            <CardContent>
-                  {activeHatches.length === 0 ? (
-                <div className="text-center py-8">
-                  <div className="flex justify-center mb-4 w-full">
-                    <div
-                      className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30"
-                      style={{ maxWidth: 720, aspectRatio: '16/9' }}
+            <CardContent className="p-0">
+              <div className="w-full max-w-md mx-auto" style={{ aspectRatio: '2/3' }}>
+                {activeHatches.length === 0 ? (
+                  // No active hatches: show background video with overlay
+                  <div
+                    className="relative w-full h-full rounded-lg overflow-hidden"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(4, 77, 52, 0.3) 0%, rgba(20, 100, 40, 0.3) 100%)',
+                      border: '2px solid transparent',
+                      backgroundImage: 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), linear-gradient(135deg, hsl(4, 77%, 52%), hsl(20, 100%, 28%))',
+                      backgroundClip: 'padding-box, border-box',
+                      backgroundOrigin: 'padding-box, border-box',
+                    }}
+                  >
+                    {/* Background video fill */}
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-cover"
                     >
-                      <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'contain' }}>
-                        <source src="/images/20251125_2312_video.mp4" type="video/mp4" />
-                      </video>
+                      <source src="/images/20251125_2312_video.mp4" type="video/mp4" />
+                    </video>
+
+                    {/* Gradient overlay for text contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/60" />
+
+                    {/* Centered content overlay */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-6">
+                      <Clock className="w-12 h-12 mb-3 opacity-80" />
+                      <p className="text-lg font-semibold">No active hatches</p>
+                      <p className="text-sm opacity-90 mt-1">Start your first hatch to see progress here</p>
                     </div>
                   </div>
-                  <Clock className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <p>No active hatches</p>
-                  <p className="text-sm">Start your first hatch to see progress here</p>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {activeHatches.length > 0 && (() => {
-                    // Display only the first active hatch
+                ) : (
+                  // Active hatch: show egg video with overlaid stats
+                  (() => {
                     const hatch = activeHatches[0];
                     const progress = getProgress(hatch.locked_at, hatch.unlock_at);
-                    const isHatching = progress < 100;
                     const eggVideo = getEggVideo(hatch.characters_2025_11_20_15_49?.[0]?.species_mix || []);
-                    
+
                     return (
-                      <div key={hatch.id} className="p-4 border border-border/50 rounded-lg">
-                        {/* Egg Video Display */}
-                        <div className="flex justify-center mb-4 w-full">
-                            <div
-                              className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30"
-                              style={{ maxWidth: 720, aspectRatio: '16/9' }}
-                            >
-                              <video
-                                src={eggVideo}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                      <div
+                        key={hatch.id}
+                        className="relative w-full h-full rounded-lg overflow-hidden"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(4, 77, 52, 0.3) 0%, rgba(20, 100, 40, 0.3) 100%)',
+                          border: '2px solid transparent',
+                          backgroundImage: 'linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), linear-gradient(135deg, hsl(4, 77%, 52%), hsl(20, 100%, 28%))',
+                          backgroundClip: 'padding-box, border-box',
+                          backgroundOrigin: 'padding-box, border-box',
+                        }}
+                      >
+                        {/* Video background fill */}
+                        <video
+                          src={eggVideo}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+
+                        {/* Gradient overlay for text contrast */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70" />
+
+                        {/* Top info overlay */}
+                        <div className="absolute top-0 left-0 right-0 p-4 z-10">
+                          <div className="flex justify-between items-start">
+                            <div className="text-white">
+                              <div className="flex items-center gap-2 mb-1">
+                                <Coins className="w-4 h-4" />
+                                <span className="font-semibold text-sm">{hatch.token_amount} BRD</span>
+                              </div>
+                              <p className="text-xs opacity-90">
+                                {hatch.lock_duration_days} day lock
+                              </p>
+                            </div>
+                            <Badge variant="outline" className="text-xs bg-black/40 text-white border-white/30">
+                              {getTimeRemaining(hatch.unlock_at)}
+                            </Badge>
+                          </div>
+                        </div>
+
+                        {/* Bottom progress overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-xs text-white">
+                              <span>Progress</span>
+                              <span>{Math.round(progress)}%</span>
+                            </div>
+                            <div className="w-full bg-black/40 rounded-full h-1 overflow-hidden">
+                              <div
+                                className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-300"
+                                style={{ width: `${progress}%` }}
                               />
                             </div>
                           </div>
 
-                        <div className="flex justify-between items-start mb-3">
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <Coins className="w-4 h-4 text-accent" />
-                              <span className="font-semibold">{hatch.token_amount} BRD</span>
-                            </div>
-                            <p className="text-sm text-muted-foreground">
-                              {hatch.lock_duration_days} day lock
-                            </p>
-                          </div>
-                          <Badge variant="outline" className="text-xs">
-                            {getTimeRemaining(hatch.unlock_at)}
-                          </Badge>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span>Progress</span>
-                            <span>{Math.round(progress)}%</span>
-                          </div>
-                          <Progress 
-                            value={progress} 
-                            className="h-2"
-                          />
-                        </div>
-
-                        {activeHatches.length > 1 && (
-                          <div className="mt-4">
-                            <p className="text-xs text-muted-foreground text-center mb-3">
+                          {/* Second hatch indicator */}
+                          {activeHatches.length > 1 && (
+                            <p className="text-xs text-white/80 text-center mt-3 opacity-90">
                               +{activeHatches.length - 1} more hatching
                             </p>
-                            {/* Show second hatch preview */}
-                            {activeHatches[1] && (() => {
-                              const second = activeHatches[1];
-                              const progress2 = getProgress(second.locked_at, second.unlock_at);
-                              const eggVideo2 = getEggVideo(second.characters_2025_11_20_15_49?.[0]?.species_mix || []);
-                              return (
-                                <div className="flex items-start gap-4">
-                                  <div className="w-1/3">
-                                      <div className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30" style={{ maxWidth: 320, aspectRatio: '16/9' }}>
-                                      <video src={eggVideo2} autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-                                    </div>
-                                  </div>
-                                  <div className="flex-1 text-sm">
-                                    <div className="flex items-center gap-2 mb-1">
-                                      <Coins className="w-4 h-4 text-accent" />
-                                      <span className="font-semibold">{second.token_amount} BRD</span>
-                                    </div>
-                                    <p className="text-xs text-muted-foreground">{second.lock_duration_days} day lock</p>
-                                    <div className="mt-2">
-                                      <Progress value={progress2} className="h-2" />
-                                    </div>
-                                  </div>
-                                </div>
-                              );
-                            })()}
-                          </div>
-                        )}
+                          )}
+                        </div>
                       </div>
                     );
-                  })()}
-                </div>
-              )}
+                  })()
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>
