@@ -385,11 +385,14 @@ const Hatching = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              {activeHatches.length === 0 ? (
+                  {activeHatches.length === 0 ? (
                 <div className="text-center py-8">
                   <div className="flex justify-center mb-4 w-full">
-                    <div className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30" style={{ height: 320, maxWidth: 480 }}>
-                      <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+                    <div
+                      className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30"
+                      style={{ maxWidth: 720, aspectRatio: '16/9' }}
+                    >
+                      <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'contain' }}>
                         <source src="/images/20251125_2312_video.mp4" type="video/mp4" />
                       </video>
                     </div>
@@ -411,20 +414,20 @@ const Hatching = () => {
                       <div key={hatch.id} className="p-4 border border-border/50 rounded-lg">
                         {/* Egg Video Display */}
                         <div className="flex justify-center mb-4 w-full">
-                          <div
-                            className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30"
-                            style={{ height: 320, maxWidth: '100%' }}
-                          >
-                            <video
-                              src={eggVideo}
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                            />
+                            <div
+                              className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30"
+                              style={{ maxWidth: 720, aspectRatio: '16/9' }}
+                            >
+                              <video
+                                src={eggVideo}
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                              />
+                            </div>
                           </div>
-                        </div>
 
                         <div className="flex justify-between items-start mb-3">
                           <div>
@@ -465,8 +468,8 @@ const Hatching = () => {
                               return (
                                 <div className="flex items-start gap-4">
                                   <div className="w-1/3">
-                                    <div className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30" style={{ height: 140 }}>
-                                      <video src={eggVideo2} autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                      <div className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30" style={{ maxWidth: 320, aspectRatio: '16/9' }}>
+                                      <video src={eggVideo2} autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                                     </div>
                                   </div>
                                   <div className="flex-1 text-sm">
