@@ -134,13 +134,13 @@ const Index = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Link to="/hatching">
-              <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-lg hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+              <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold text-lg hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center w-full sm:w-auto" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                 <Zap className="w-5 h-5 mr-2" />
                 Start Hatching
               </button>
             </Link>
             <Link to="/trading">
-              <button className="px-8 py-4 rounded-xl bg-black/30 border-2 border-orange-900/50 text-white font-bold text-lg hover:bg-black/50 transition-colors flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+              <button className="px-8 py-4 rounded-xl bg-black/30 border-2 border-orange-900/50 text-white font-bold text-lg hover:bg-black/50 transition-colors flex items-center justify-center w-full sm:w-auto" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                 <Swords className="w-5 h-5 mr-2" />
                 Explore Trading
               </button>
