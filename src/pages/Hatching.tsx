@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, Zap, Clock, Coins, Sparkles } from "lucide-react";
+import { ArrowLeft, Zap, Clock, Coins, Sparkles, Wallet } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -295,6 +295,14 @@ const Hatching = () => {
               Creature Hatching
             </h1>
           </div>
+          {!user && (
+            <div className="flex items-center space-x-4">
+              <button className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                <Wallet className="w-4 h-4 mr-2" />
+                Connect Wallet
+              </button>
+            </div>
+          )}
         </div>
       </header>
 
