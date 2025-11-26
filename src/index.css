@@ -133,3 +133,15 @@
   z-index: -1;
   pointer-events: none;
 }
+
+/* Egg Video Container - Ensures it displays above background */
+.egg-video-container {
+  position: relative;
+  z-index: 1;
+}
+
+.egg-video-container video {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

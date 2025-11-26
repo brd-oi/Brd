@@ -386,7 +386,14 @@ const Hatching = () => {
             </CardHeader>
             <CardContent>
               {activeHatches.length === 0 ? (
-                <div className="text-center py-8 text-muted-foreground">
+                <div className="text-center py-8">
+                  <div className="flex justify-center mb-4 w-full">
+                    <div className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30" style={{ height: 320, maxWidth: 480 }}>
+                      <video autoPlay muted loop playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }}>
+                        <source src="/images/20251125_2312_video.mp4" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
                   <Clock className="w-12 h-12 mx-auto mb-4 opacity-50" />
                   <p>No active hatches</p>
                   <p className="text-sm">Start your first hatch to see progress here</p>
@@ -403,19 +410,21 @@ const Hatching = () => {
                     return (
                       <div key={hatch.id} className="p-4 border border-border/50 rounded-lg">
                         {/* Egg Video Display */}
-                        {isHatching && (
-                          <div className="flex justify-center mb-4">
+                        <div className="flex justify-center mb-4 w-full">
+                          <div
+                            className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30"
+                            style={{ height: 320, maxWidth: '100%' }}
+                          >
                             <video
                               src={eggVideo}
                               autoPlay
                               loop
                               muted
                               playsInline
-                              className="w-32 h-32 object-cover rounded-lg"
-                              style={{ aspectRatio: '1/1' }}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                           </div>
-                        )}
+                        </div>
 
                         <div className="flex justify-between items-start mb-3">
                           <div>
@@ -444,9 +453,36 @@ const Hatching = () => {
                         </div>
 
                         {activeHatches.length > 1 && (
-                          <p className="text-xs text-muted-foreground text-center mt-4">
-                            +{activeHatches.length - 1} more hatching
-                          </p>
+                          <div className="mt-4">
+                            <p className="text-xs text-muted-foreground text-center mb-3">
+                              +{activeHatches.length - 1} more hatching
+                            </p>
+                            {/* Show second hatch preview */}
+                            {activeHatches[1] && (() => {
+                              const second = activeHatches[1];
+                              const progress2 = getProgress(second.locked_at, second.unlock_at);
+                              const eggVideo2 = getEggVideo(second.characters_2025_11_20_15_49?.[0]?.species_mix || []);
+                              return (
+                                <div className="flex items-start gap-4">
+                                  <div className="w-1/3">
+                                    <div className="egg-video-container w-full rounded-lg overflow-hidden bg-black/20 border border-border/30" style={{ height: 140 }}>
+                                      <video src={eggVideo2} autoPlay loop muted playsInline style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                    </div>
+                                  </div>
+                                  <div className="flex-1 text-sm">
+                                    <div className="flex items-center gap-2 mb-1">
+                                      <Coins className="w-4 h-4 text-accent" />
+                                      <span className="font-semibold">{second.token_amount} BRD</span>
+                                    </div>
+                                    <p className="text-xs text-muted-foreground">{second.lock_duration_days} day lock</p>
+                                    <div className="mt-2">
+                                      <Progress value={progress2} className="h-2" />
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })()}
+                          </div>
                         )}
                       </div>
                     );
