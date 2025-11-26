@@ -2,9 +2,27 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Trophy, Swords, Crown, Star, Zap, Clock } from "lucide-react";
+import { ArrowLeft, Trophy, Swords, Crown, Star, Zap, Clock, Wallet } from "lucide-react";-react";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Arena = () => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <div className="min-h-screen relative" style={{
       background: 'linear-gradient(180deg, #0C0F1D 0%, #2A1A14 30%, #5A2A18 60%, #8C3A14 100%)'
@@ -31,6 +49,14 @@ const Arena = () => {
               Coming Soon
             </span>
           </div>
+          {!user && (
+            <div className="flex items-center space-x-4">
+              <button className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                <Wallet className="w-4 h-4 mr-2" />
+                Connect Wallet
+              </button>
+            </div>
+          )}
         </div>
       </header>
 

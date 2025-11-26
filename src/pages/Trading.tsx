@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft, Swords, ShoppingCart, Tag, Star, Zap } from "lucide-react";
+import { ArrowLeft, Swords, ShoppingCart, Tag, Star, Zap, Wallet } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -415,6 +415,14 @@ const Trading = () => {
               Creature Trading
             </h1>
           </div>
+          {!user && (
+            <div className="flex items-center space-x-4">
+              <button className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
+                <Wallet className="w-4 h-4 mr-2" />
+                Connect Wallet
+              </button>
+            </div>
+          )}
         </div>
       </header>
 
