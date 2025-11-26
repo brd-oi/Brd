@@ -97,23 +97,24 @@ const Index = () => {
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-2">
-                <Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
+                <span className="px-3 py-1 rounded-full bg-[#FF8A2F]/20 text-[#FF8A2F] border border-[#FF8A2F]/30 text-sm font-semibold flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                   <Wallet className="w-3 h-3 mr-1" />
                   Connected
-                </Badge>
-                <Button variant="outline" size="sm" onClick={signOut}>
+                </span>
+                <button onClick={signOut} className="px-4 py-2 rounded-xl bg-black/30 border border-orange-900/50 text-white hover:bg-black/50 transition-colors text-sm font-semibold flex items-center justify-center" style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}>
                   Disconnect
-                </Button>
+                </button>
               </div>
             ) : (
-              <Button 
+              <button 
                 onClick={connectWallet} 
                 disabled={isConnecting}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                className="px-6 py-2 rounded-xl bg-gradient-to-r from-[#FF7A22] to-[#FFAA33] text-white font-bold hover:shadow-[0_0_20px_rgba(255,122,34,0.5)] transition-shadow disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                style={{ fontFamily: 'Poppins, Inter, Nunito, sans-serif' }}
               >
                 <Wallet className="w-4 h-4 mr-2" />
                 {isConnecting ? "Connecting..." : "Connect Wallet"}
-              </Button>
+              </button>
             )}
           </div>
         </div>
